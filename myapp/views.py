@@ -12,8 +12,7 @@ def index(request):
             expense.save()
 
     expenses = Expense.objects.all()
-
-
+    total_expenses = expenses.aggregate(sum('amount'))
 
     expense_form = ExpenseForm()
 
