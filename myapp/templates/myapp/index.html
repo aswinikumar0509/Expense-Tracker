@@ -1,6 +1,6 @@
 {% extends 'myapp/base.html'%}
 {% load static %}
-
+{% load humanize%}
 {%block body%}
 <h1 class="m-10 font-bold">Add Expense ➕</h1>
 <form class="shadow-lg m-10 rounded-lg" method="post">
@@ -49,7 +49,7 @@
     {% for expense in expenses %}
     <div class="expense-row flex felx-wrap px-20 py-5 space-x-40">
         <span class="font-bold">{{expense.name}}</span>
-        <span class="font-bold">{{expense.amount}}</span>
+        <span class="font-bold">{{expense.amount|intcomma}}</span>
         <span class="font-bold">{{expense.category}}</span>
         <span class="font-bold">{{expense.date}}</span>
         <span class="pl-22"><a href="{% url 'edit' expense.id %}"></a>
@@ -66,5 +66,23 @@
         </span>
     </div>
     {% endfor %}
+
+    <!-- Displaying total -->
+    <div class="px-72 py-5">
+    <span class="font-bold text-green-500">
+        Total : ${{ total_expenses.amount__sum|intcomma }}
+    </span>
+    </div>
+       
+</div class="flex">
+<div class="shadow-lg ml-10 rounded-lg">
+    <h1>Last 365 Days</h1>
+    <h1 class="">
+        {{yearly_sum.amount__sum|intcomma}}
+    </h1>
+</div>
+
+<div>
+
 </div>
 {% endblock %}
