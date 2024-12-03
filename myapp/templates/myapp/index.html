@@ -74,15 +74,81 @@
     </span>
     </div>
        
-</div class="flex">
-<div class="shadow-lg ml-10 rounded-lg">
-    <h1>Last 365 Days</h1>
-    <h1 class="">
-        {{yearly_sum.amount__sum|intcomma}}
-    </h1>
+<div class="flex">
+    <div class="w-1/3 shadow-lg ml-10 rounded-lg">
+        <h1 class="ml-10 font-bold text-gray-500">Last 365 Days</h1>
+        <h1 class="ml-10 my-5 text-2xl text-green-500 font-bold" >
+            {{yearly_sum.amount__sum|intcomma}}
+        </h1>
+    </div>
+    <div class="w-1/3 shadow-lg ml-10 rounded-lg">
+        <h1 class="ml-10 font-bold text-gray-500">Last 30 Days</h1>
+        <h1 class="ml-10 my-5 text-2xl text-green-500 font-bold" >
+            {{monthly_sum.amount__sum|intcomma}}
+        </h1>
+    </div>
+    <div class="w-1/3 shadow-lg ml-10 rounded-lg">
+        <h1 class="ml-10 font-bold text-gray-500">Last 7 Days</h1>
+        <h1 class="ml-10 my-5 text-2xl text-green-500 font-bold" >
+            {{weekly_sum.amount__sum|intcomma}}
+        </h1>
+    </div>
 </div>
 
-<div>
+<div class="flex">
+    <div class="w-1/2 shadow-lg m-10">
+        <div class="flex flex-wrap space-x-40 font-bold px-20 py-5">
+            <span>Past 30 Days Sum Expenses </span>
+        </div>
+        <hr>
+        <div id="30-day-table">
+            {% for daily_sum in daily_sums %}
+            <div class="flex flex-wrap px-20 py-5">
+                <span>
+                    {{daily_sum.date}}
+                </span>
+            </div>
+            <div class="flex flex-wrap px-20 py-5">
+                <span class="text-green-500">
+                    {{daily_sum.sum|intcomma}}
+
+                </span>
+
+            </div>
+            {% endfor %}
+        </div>
+
+        
+
+    </div>
+
+    <div class="w-1/2 shadow-lg m-10">
+        <div class="flex flex-wrap space-x-40 font-bold px-20 py-5">
+            <span>Category Expenses </span>
+        </div>
+        <hr>
+        <div id="30-day-table">
+            {% for category_sum in categorical_sums %}
+            <div class="flex flex-wrap px-20 py-5">
+                <span>
+                    {{category_sum.category}}
+                </span>
+            </div>
+            <div class="flex flex-wrap px-20 py-5">
+                <span class="text-green-500">
+                    {{category_sum.sum|intcomma}}
+
+                </span>
+
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
 
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2/dist/chart.min.js"></script>
+
+
 {% endblock %}
